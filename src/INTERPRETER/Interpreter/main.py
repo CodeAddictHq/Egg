@@ -44,6 +44,7 @@ class Interpreter:
       return None
     except AlreadyExistsError as e:
       raise AlreadyExistsError(e.msg, node.line)
+
   def visitVarAssignNode(self, node):
     try:
       name = (node.name.identifier)
@@ -68,7 +69,6 @@ class Interpreter:
     typer = Fun()
     one = self.visitOneNode(node.one)
     itr = (node.iterable)
-    print(self.visit(itr))
     if not typer.type([self.visit(itr)]) in {"STRING", "ARRAY", "HASH_KEYS", "HASH_VALUES"}:
       if typer.type([self.visit(itr)]) == "HASHMAP":
         raise RuntimeError("HASHMAP directly is not iterable", node.line)
@@ -91,8 +91,8 @@ class Interpreter:
   def visitIfStatementNode(self, node):
     try:
       con_if = self.visit(node.con)
-    except NotFoundError:
-      con_if = False
+    except NotFoundError as e:
+      raise NotFoundError(e.msg, node.line)
     if con_if:
       self.env = Env(self.env)
       for i in node.works:
@@ -103,8 +103,9 @@ class Interpreter:
     for i in node.elif_nodes:
       try:
         con_elif = self.visit(i.con)
-      except NotFoundError:
-        con_elif = None
+      except NotFoundError as e:
+        raise NotFoundError(e.msg, i.line)
+
       if con_elif:
         self.env = Env(self.env)
         for n in i.works:
@@ -149,6 +150,7 @@ class Interpreter:
       return value
     except NotFoundError as e:
       raise NotFoundError(e.msg, node.line)
+
   def visitMethodCallNode(self, node):
     try: 
       name = "method_"+str(node.name.identifier)
@@ -175,7 +177,7 @@ class Interpreter:
       for idx, i in enumerate(values):
         self.env.define(params[idx], i)
     except IndexError:
-      raise RuntimeError()
+      raise RuntimeError("Too few arguments supplied.")
     try:
       for n in fun["works"]:
         self.visit(n)
@@ -224,6 +226,7 @@ class Interpreter:
       return self.env.get(node.identifier)
     except NotFoundError as e:
       raise NotFoundError(e.msg, node.line)
+
   def visitBinOpNode(self, node):
     left = self.visit(node.left)
     right = self.visit(node.right)
@@ -245,6 +248,7 @@ class Interpreter:
       raise UnsupportedTypeError(f"unsupported operand types >> {left} {opr} {right}", node.line)
     except ZeroDivisionError as e:
       raise RuntimeError(f"(o≧▽≦)ﾉ Dont know basic math ? ZeroDivisionError >> {left} {opr} {right}", node.line)
+
   def visitBinCompNode(self, node):
     left = self.visit(node.left)
     right = self.visit(node.right)
@@ -270,13 +274,15 @@ class Interpreter:
         raise UnsupportedTypeError(f"Unexpected comparison oparetor >> {left} {opr} {right}", node.line)
     except:
       raise UnsupportedTypeError(f"Unexpected comparison oparetor >> {left} {comp} {right}", node.line)
+    
+
   def visitUnaryOpNode(self, node):
     opr = node.opr 
     value = None
     try:
       value = self.visit(node.val)
-    except NotFoundError:
-      value = False
+    except NotFoundError as e:
+      raise NotFoundError(e.msg, node.line)
       
     if opr == "-":
       try:
@@ -284,14 +290,14 @@ class Interpreter:
       except ValueError:
         return float(f'{opr}{value}')
       except ValueError:
-        raise RuntimeError()
+        raise RuntimeError(f"invalid unary >> {value}")
     elif opr == "not":
       if value:
         return False
-      elif not value:
-        return True
+      return True
     else :
       raise RuntimeError("Unexpected unary oparetor", node.line)
+    
   def visitNoneType(self, node):
     return None
   def visitListAccessNode(self, node):
@@ -301,6 +307,7 @@ class Interpreter:
       return (li[idx])
     except IndexError as e:
       raise RuntimeError(f"List index out of range >> {node.li.identifier}[{idx}] not exists yet ")
+
   def visitDictAccessNode(self, node):
     try:
       child = node.child.identifier
@@ -308,6 +315,7 @@ class Interpreter:
       return parent[child]
     except NotFoundError as e:
       raise NotFoundError(e.msg, node.line)
+
   def visitDictUpdateNode(self, node):
     path = []
     val = self.visit(node.value)
@@ -329,6 +337,7 @@ class Interpreter:
           else:
             st = st +"."+path[i]
         raise NotFoundError(f"Element not found in var >> {st}", node.line)
+
   def visitListUpdateNode(self, node):
     path = []
     val = self.visit(node.value)
@@ -341,15 +350,15 @@ class Interpreter:
       self.Update(path, val, node)
     except KeyError:
       self.prev_env(node)
-    except IndexError or NotFoundError:
+    except (IndexError, NotFoundError):
       st = str(path[0])
       for i in range(1, len(path)):
         if isinstance(path[i], int):
           st = st +f"[{path[i]}]"
         else:
           st = st +"."+path[i]
-          
       raise NotFoundError(f"Element not found in var >> {st}", node.line)
+
   def Update(self, path, val, node):
     try:
       memo = self.env.vars[path[0]]
@@ -358,9 +367,10 @@ class Interpreter:
       memo[path[-1]] = val
     except TypeError:
       raise UnsupportedTypeError("Unsupported oparetion trying ", node.line)
+
   def prev_env(self, node):
     if not self.env.parent:
-      raise NotFoundError()
+      raise NotFoundError("Variable not found.")
     prev_env = self.env
     self.env = self.env.parent 
     self.visit(node)

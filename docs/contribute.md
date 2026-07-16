@@ -1,24 +1,9 @@
-```text
-███████╗ ██████╗  ██████╗
-██╔════╝██╔════╝ ██╔════╝
-█████╗  ██║  ███╗██║  ███╗
-██╔══╝  ██║   ██║██║   ██║
-███████╗╚██████╔╝╚██████╔╝
-╚══════╝ ╚═════╝  ╚═════╝
-```
+
 
 # Contributing to EggLang
 
 You can contribute by fixing a bug, improving documentation, adding a feature, writing tests, or anything else — I always welcome contributions.
 
----
-
-## Getting Started
-
-1. Fork the repo.
-2. Clone your fork.
-3. Create a new branch with a name that reflects what you're contributing.
-4. Install the dependencies from `r.txt`.
 
 ---
 
@@ -81,7 +66,7 @@ check out tests from from main readme to know more
 
 Fix any minor bugs you find in the parser or interpreter.
 
-###6 Doc update 
+### 6 Doc update 
 you can also update or make doc in detail that other can understand egg easily
 
 

@@ -102,9 +102,7 @@ Try EGG, explore it, and share your feedback!
 
 
 def main():
-  try:
-    app()
-  except Exception as e:
-    print(e)
+  app()
+  
 if __name__ =="__main__":
   main()

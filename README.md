@@ -13,12 +13,15 @@
 
 ## 📚 Documentation
 
-| Guide | Description |
-|-------|-------------|
-| [Language Syntax](./docs/syntax.md) | Learn the language grammar, keywords, data types, operators, and core syntax. |
-| [Architecture Overview](./docs/architecture.md) | Explore how EggLang is implemented, from lexing and parsing to AST evaluation and runtime execution. |
-| [Testing Guide](./docs/tests.md) | Review the project's test suite and the cases used to validate language features. |
-| [Contributing Guide](./docs/contribute.md) | Learn how to contribute, report issues, and submit improvements. |
+Everything you need to learn, understand, and contribute to EggLang.
+
+| 📖 Topic | Description |
+|:---------|:------------|
+| 📘 **[Language Syntax](./docs/syntax.md)** | Learn the language grammar, keywords, data types, operators, built-in functions, and syntax. |
+| 🏗️ **[Architecture Overview](./docs/architecture.md)** | Explore how EggLang works internally, from lexing and parsing to AST evaluation and runtime execution. |
+| 💻 **[Example Programs](./docs/example.md)** | Browse small example programs that demonstrate EggLang's syntax and common language features. |
+| 🧪 **[Testing Guide](./docs/tests.md)** | Review the project's test suite and the cases used to validate language features. |
+| 🤝 **[Contributing Guide](./docs/contribute.md)** | Learn how to contribute, report issues, and submit improvements. |
 
 ---
 

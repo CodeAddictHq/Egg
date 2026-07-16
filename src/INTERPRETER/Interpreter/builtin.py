@@ -1,5 +1,10 @@
 from collections import deque
-from ..Errors.runtime import TypeNotAllowed, RuntimeError, NotFoundError, ArgsNotAllowed
+from ..Errors.runtime import (
+  TypeNotAllowed,
+  RuntimeError,
+  NotFoundError,
+  ArgsNotAllowed,
+)
 
 
 class Fun:
@@ -22,7 +27,7 @@ class Fun:
   def type(self, val):
     try:
       if len(val) > 1:
-        raise ArgsNotAllowed("Args allowed only 1")
+        raise ArgsNotAllowed("Only one argument is allowed.")
       return self.get_types(val[0])
     except Exception:
       raise
@@ -43,23 +48,41 @@ class Fun:
         return "HASH_KEYS"
       elif isinstance(val, type({}.values())):
         return "HASH_VALUES"
+      elif isinstance(val, deque):
+        return "QUEUE"
       else:
-        return None
+        return "UNKNOWN"
     except Exception as e:
       raise RuntimeError(str(e))
 
   def keys(self, val):
     try:
-      if len(val) != 1 or not isinstance(val[0], dict):
-        raise TypeNotAllowed()
+      if len(val) != 1:
+        raise ArgsNotAllowed("keys() expects exactly one argument.")
+      if not isinstance(val[0], dict):
+        raise TypeNotAllowed("keys() can only be used on a HASHMAP.")
       return val[0].keys()
+    except Exception:
+      raise
+
+  def len(self, val):
+    try:
+      if len(val) != 1:
+        raise ArgsNotAllowed("len() expects exactly one argument.")
+      return len(val[0])
+    except TypeError:
+      raise TypeNotAllowed(
+        f"Type '{self.get_types(val[0])}' has no length."
+      )
     except Exception:
       raise
 
   def values(self, val):
     try:
-      if len(val) != 1 or not isinstance(val[0], dict):
-        raise TypeNotAllowed()
+      if len(val) != 1:
+        raise ArgsNotAllowed("values() expects exactly one argument.")
+      if not isinstance(val[0], dict):
+        raise TypeNotAllowed("values() can only be used on a HASHMAP.")
       return val[0].values()
     except Exception:
       raise
@@ -67,14 +90,14 @@ class Fun:
   def check(self, val):
     try:
       if len(val) > 1:
-        raise ArgsNotAllowed("Args allowed only 1")
+        raise ArgsNotAllowed("Only one argument is allowed.")
     except Exception:
       raise
 
   def string(self, val):
     try:
       if len(val) != 1:
-        raise TypeNotAllowed()
+        raise ArgsNotAllowed("string() expects exactly one argument.")
       return str(val[0])
     except Exception:
       raise
@@ -82,13 +105,15 @@ class Fun:
   def number(self, val):
     try:
       if len(val) != 1:
-        raise TypeNotAllowed()
+        raise ArgsNotAllowed("number() expects exactly one argument.")
       try:
         return int(val[0])
       except ValueError:
         return float(val[0])
     except (ValueError, TypeError):
-      raise TypeNotAllowed()
+      raise TypeNotAllowed(
+        f"Cannot convert {val[0]!r} to a number."
+      )
     except Exception:
       raise
 
@@ -100,31 +125,35 @@ class Fun:
       return input()
     except Exception:
       raise
-
+  
   # List methods
 
   def method_push(self, val):
     try:
       if len(val) != 2:
-        raise TypeNotAllowed(f"Unsupported arguments >> {val}")
+        raise ArgsNotAllowed(
+          "push() expects two arguments: value and array."
+        )
       val[1].append(val[0])
     except AttributeError:
       raise TypeNotAllowed(
-        f"Type not allowed for push >> {self.get_types(val[1])}"
+        f"push() is not supported for type '{self.get_types(val[1])}'."
       )
     except Exception:
       raise
 
   def method_pop(self, val):
     try:
-      if len(val) != 2:
-        raise TypeNotAllowed(f"Unsupported arguments >> {val}")
+      if len(val) != 1:
+        raise ArgsNotAllowed(
+          "pop() expects 1 arguments."
+        )
       return val[0].pop()
     except AttributeError:
       raise TypeNotAllowed(
-        f"Type not allowed for pop >> {self.get_types(val[0])}"
+        f"pop() is not supported for type '{self.get_types(val[0])}'."
       )
+    except IndexError:
+      raise RuntimeError("Cannot pop from an empty array.")
     except Exception:
       raise
-
-  # Dict methods

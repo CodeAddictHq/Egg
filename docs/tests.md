@@ -1,60 +1,48 @@
-```text
-███████╗ ██████╗  ██████╗
-██╔════╝██╔════╝ ██╔════╝
-█████╗  ██║  ███╗██║  ███╗
-██╔══╝  ██║   ██║██║   ██║
-███████╗╚██████╔╝╚██████╔╝
-╚══════╝ ╚═════╝  ╚═════╝
-```
 
-🧪 EggLang Testing Guide
+
+# 🧪 EggLang Testing Guide
 
 ## Overview
 
-I have made some test code using the syntax of EggLang and run it.
-
-The `tests/` directory contains both standard and stress tests. There are some files that show only one item in the test, and there is a combined file that contains 2800+ lines of Egg code, which Egg passes easily, from basic operations to recursion operations, etc.
-
----
-
-## Test Structure
-
-In the `tests/` folder, there is a main file that runs all tests.
+I have made some test code with the syntax of egg and run them.
+The `tests/` directory contains both standard and stress tests. There are some files showing only one item in the test, and there is a combined file which contains 2800+ lines of egg code which egg passes easily, from basic operations to including recursion operations, etc.
 
 ---
 
-## Running Tests
+## 🗂️ Test Structure
 
-There is a directory called `tests`.
+In the test folder there is a main file which runs all tests.
 
-There, you will find `test.py`. Run that file to execute the tests.
+---
 
-To create your own test:
+## ▶️ Running Tests
 
-Create your own file for testing, add critical syntax, add it to the `tests` directory, then add it to the list of tests in `tests.py`, and run it to see all tests, including yours.
+There is a dir called `tests`.
+There I have `test.py`, run that file to see tests.
+
+**To create your own test:**
+Create your own file for testing, add critical syntaxes, and add that to that dir called `tests`, and add that to the list of `tests.py` file called `tests`, and run it to see all tests including yours.
 
 **Individual test:**
-
-Keep the list containing only your file name and run that file to test your code.
+Keep the list to only your file name and run that file to test the code.
 
 ---
 
-## Writing New Tests
+## ✍️ Writing New Tests
 
 When adding new language features:
 
-1. Create a new `.egg.txt` file inside the `tests/` directory. Yes, `.txt`, because to keep your tests on GitHub, you have to add `.txt`; otherwise, GitHub won't treat the file correctly as `.egg`, because Python has some built-in association with the `.egg` extension. That's why `.gitignore` ignores it.
-2. Add test cases.
+1. Create a new `.egg.txt` file inside the `tests/` directory. Yes, `.txt`, because to keep your tests in GitHub you have to add `.txt`, else GitHub won't take the file as `.egg`, because Python has some built-in relation with the `.egg` extension, that's why `.gitignore` ignores it.
+2. Add testcases.
 3. Add a simple test success log like:
    ```
    your_name_test_1...OK
    ```
-4. Add comments explaining the purpose of complex test cases.
+5. Add comments explaining the purpose of complex test cases.
 
-Example:
-
+**Example:**
 ```egg
-€Checking if Egg can parse list access expressions
+€Checking if egg can parse list access expressions
 var values = [10, 20, 30, 40,]
 var calculation = values[0] + values[-1] * 2
 fineshow("T7:", calculation, "...OK")
@@ -62,7 +50,7 @@ fineshow("T7:", calculation, "...OK")
 
 ---
 
-## Test Coverage
+## ✅ Test Coverage
 
 The current test suite covers:
 
