@@ -1,0 +1,207 @@
+€ Advanced variable, expression, comparison and access test cases
+
+
+var a = 10
+var b = 20
+var c = 30
+
+var algebra1 = a + b * c - 5
+
+fineshow("T1:", algebra1)
+
+
+var x = 5
+var y = 10
+
+var algebra2 = (x + y) * 2 ^ 3
+
+fineshow("T2:", algebra2)
+
+
+var price = 100
+var quantity = 5
+var tax = 20
+
+var total = price * quantity + tax
+
+fineshow("T3:", total)
+
+
+var user = {
+    age: 18,
+    active: TRUE,
+}
+
+var check1 = user.age > 15 and user.active
+
+fineshow("T4:", check1)
+
+
+var score = 90
+
+var check2 = score > 50 and score <_ 100
+
+fineshow("T5:", check2)
+
+
+var password = "abc"
+
+var check3 = password isnot "xyz"
+
+fineshow("T6:", check3)
+
+
+var values = [10, 20, 30, 40,]
+
+var calculation = values[0] + values[-1] * 2
+
+fineshow("T7:", calculation)
+
+
+var profile = {
+    stats: {
+        level: 10,
+        points: 500,
+    },
+}
+
+var level_result = profile.stats.level + profile.stats.points
+
+fineshow("T8:", level_result)
+
+
+var products = [
+    {
+        price: 100,
+        quantity: 2,
+    },
+    {
+        price: 200,
+        quantity: 3,
+    },
+]
+
+var product_total = products[1].price * products[1].quantity
+
+fineshow("T9:", product_total)
+
+
+var matrix = [
+    [1, 2,],
+    [3, 4,],
+]
+
+var matrix_calc = matrix[0][1] + matrix[1][0]
+
+fineshow("T10:", matrix_calc)
+
+
+var account = {
+    balance: 5000,
+    bonus: 1000,
+}
+
+var final_balance = account.balance + account.bonus * 2
+
+fineshow("T11:", final_balance)
+
+
+var data = {
+    users: [
+        {
+            score: 80,
+        },
+        {
+            score: 95,
+        },
+    ],
+}
+
+var score_compare = data.users[1].score > data.users[0].score
+
+fineshow("T12:", score_compare)
+
+
+var a1 = 50
+var b1 = 50
+
+var equal_test = a1 is b1
+
+fineshow("T13:", equal_test)
+
+
+var inventory = {
+    items: [
+        "Sword",
+        "Shield",
+        "Armor",
+    ],
+}
+
+var item_test = inventory.items[-2]
+
+fineshow("T14:", item_test)
+
+
+var company = {
+    employees: [
+        {
+            salary: 3000,
+        },
+        {
+            salary: 5000,
+        },
+    ],
+}
+
+var salary_sum = company.employees[0].salary + company.employees[1].salary
+
+fineshow("T15:", salary_sum)
+
+
+var n1 = 10
+var n2 = 5
+
+var complex = (n1 ^ 2 + n2 ^ 2) / n2
+
+fineshow("T16:", complex)
+
+
+var status = {
+    online: TRUE,
+    users: 100,
+}
+
+var system_check = status.online and status.users > 50
+
+fineshow("T17:", system_check)
+
+
+var nested = {
+    app: {
+        config: {
+            version: "2.0",
+        },
+    },
+}
+
+fineshow("T18:", nested.app.config.version)
+
+
+var numbers2 = [5, 10, 15,]
+
+var expression = numbers2[0] * numbers2[-1] + 100 / 2
+
+fineshow("T19:", expression)
+
+
+var game = {
+    player: {
+        health: 100,
+        alive: TRUE,
+    },
+}
+
+var game_check = game.player.health > 0 and game.player.alive
+
+fineshow("T20:", game_check)

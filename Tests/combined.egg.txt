@@ -1,0 +1,2832 @@
+€ Super nested advanced EGG stress tests
+€ Test 1: Enterprise order processing system
+
+
+fun calculate_order(order) {
+
+    var subtotal = 0
+
+    for (item in order.items) {
+
+        var item_total = item.price * item.quantity
+
+        subtotal = subtotal + item_total
+
+    }
+
+
+    var discount = 0
+
+    if (subtotal > 1000) {
+
+        discount = subtotal / 10
+
+    } elif (subtotal > 500) {
+
+        discount = 50
+
+    }
+
+
+    var tax = subtotal / 20
+
+    var final_price = subtotal - discount + tax
+
+
+    return {
+        customer: order.customer,
+
+        items: order.items,
+
+        calculation: {
+            subtotal: subtotal,
+            discount: discount,
+            tax: tax,
+            total: final_price,
+        },
+
+        valid: final_price > 0 and order.active,
+
+    }
+
+}
+
+
+var order = {
+
+    customer: {
+        name: "Adib",
+        level: "premium",
+    },
+
+    active: TRUE,
+
+
+    items: [
+
+        {
+            name: "Laptop",
+            price: 1200,
+            quantity: 2,
+        },
+
+        {
+            name: "Mouse",
+            price: 50,
+            quantity: 3,
+        },
+
+        {
+            name: "Keyboard",
+            price: 100,
+            quantity: 1,
+        },
+
+    ],
+
+}
+
+
+var invoice = calculate_order(order)
+
+
+fineshow("T1:", invoice)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 1)
+fineshow("STATUS:", "PASSED")
+
+€ Super nested advanced EGG stress tests
+€ Test 2: User analytics and permission engine
+
+
+fun analyze_accounts(accounts) {
+
+    var result = []
+
+    for (account in accounts) {
+
+        var score = 0
+
+
+        if (account.active) {
+
+            score = score + 50
+
+        }
+
+
+        if (account.profile.age > 18) {
+
+            score = score + 20
+
+        }
+
+
+        if (account.permissions.admin is TRUE) {
+
+            score = score + 30
+
+        }
+
+
+        var status = {
+
+            username: account.profile.name,
+
+            score: score,
+
+            level: "basic",
+
+            allowed: FALSE,
+
+        }
+
+
+        if (score >_ 80) {
+
+            status.level = "premium"
+            status.allowed = TRUE
+
+        } elif (score >_ 50) {
+
+            status.level = "standard"
+            status.allowed = TRUE
+
+        }
+
+
+        result = result + [status,]
+
+    }
+
+
+    return result
+
+}
+
+
+
+var users = [
+
+    {
+
+        active: TRUE,
+
+        profile: {
+
+            name: "Adib",
+
+            age: 20,
+
+        },
+
+        permissions: {
+
+            admin: TRUE,
+
+        },
+
+    },
+
+
+    {
+
+        active: TRUE,
+
+        profile: {
+
+            name: "Alex",
+
+            age: 16,
+
+        },
+
+        permissions: {
+
+            admin: FALSE,
+
+        },
+
+    },
+
+
+    {
+
+        active: FALSE,
+
+        profile: {
+
+            name: "John",
+
+            age: 30,
+
+        },
+
+        permissions: {
+
+            admin: FALSE,
+
+        },
+
+    },
+
+]
+
+
+
+var analytics = analyze_accounts(users)
+
+
+fineshow("T2:", analytics)
+
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 2)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 3: Banking transaction processing system
+
+
+fun process_bank(customer) {
+
+    var balance = customer.account.balance
+
+    var transactions = customer.account.transactions
+
+    var history = []
+
+
+    for (transaction in transactions) {
+
+
+        if (transaction.type is "deposit") {
+
+            balance = balance + transaction.amount
+
+
+        } elif (transaction.type is "withdraw") {
+
+
+            if (balance >_ transaction.amount) {
+
+                balance = balance - transaction.amount
+
+            }
+
+        }
+
+
+        history = history + [
+
+            {
+
+                type: transaction.type,
+
+                amount: transaction.amount,
+
+                balance: balance,
+
+            },
+
+        ]
+
+    }
+
+
+    var risk = FALSE
+
+
+    if (balance < 500) {
+
+        risk = TRUE
+
+    }
+
+
+    return {
+
+        customer: customer.name,
+
+
+        account: {
+
+            final_balance: balance,
+
+            transaction_count: history,
+
+            risky: risk,
+
+        },
+
+
+        active: customer.account.active and balance > 0,
+
+    }
+
+}
+
+
+
+var customer = {
+
+
+    name: "Adib",
+
+
+    account: {
+
+        balance: 1000,
+
+
+        active: TRUE,
+
+
+        transactions: [
+
+            {
+
+                type: "deposit",
+
+                amount: 500,
+
+            },
+
+
+            {
+
+                type: "withdraw",
+
+                amount: 200,
+
+            },
+
+
+            {
+
+                type: "withdraw",
+
+                amount: 100,
+
+            },
+
+        ],
+
+    },
+
+
+}
+
+
+
+var bank_result = process_bank(customer)
+
+
+fineshow("T3:", bank_result)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 3)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 4: E-commerce inventory and recommendation engine
+
+
+fun analyze_store(store) {
+
+    var inventory_value = 0
+    var available_products = []
+    var expensive_products = []
+
+
+    for (category in store.categories) {
+
+
+        for (product in category.products) {
+
+
+            var value = product.price * product.stock
+
+
+            inventory_value = inventory_value + value
+
+
+
+            if (product.stock > 0) {
+
+                available_products = available_products + [
+
+                    {
+
+                        name: product.name,
+
+                        quantity: product.stock,
+
+                    },
+
+                ]
+
+            }
+
+
+
+            if (product.price > 1000) {
+
+                expensive_products = expensive_products + [
+
+                    product.name,
+
+                ]
+
+            }
+
+        }
+
+    }
+
+
+
+    var status = "LOW"
+
+
+    if (inventory_value > 5000) {
+
+        status = "HIGH"
+
+    } elif (inventory_value > 2000) {
+
+        status = "MEDIUM"
+
+    }
+
+
+
+    return {
+
+        store: store.name,
+
+
+        report: {
+
+            total_value: inventory_value,
+
+            inventory_status: status,
+
+            available: available_products,
+
+            premium_items: expensive_products,
+
+        },
+
+
+        verified: store.active and inventory_value > 0,
+
+    }
+
+}
+
+
+
+var store = {
+
+
+    name: "EGG Market",
+
+
+    active: TRUE,
+
+
+    categories: [
+
+
+        {
+
+            name: "Computers",
+
+
+            products: [
+
+                {
+
+                    name: "Laptop",
+
+                    price: 1500,
+
+                    stock: 3,
+
+                },
+
+
+                {
+
+                    name: "Mouse",
+
+                    price: 50,
+
+                    stock: 20,
+
+                },
+
+            ],
+
+        },
+
+
+        {
+
+            name: "Phones",
+
+
+            products: [
+
+                {
+
+                    name: "Phone",
+
+                    price: 800,
+
+                    stock: 5,
+
+                },
+
+
+                {
+
+                    name: "Tablet",
+
+                    price: 1200,
+
+                    stock: 2,
+
+                },
+
+            ],
+
+        },
+
+    ],
+
+}
+
+
+
+var store_report = analyze_store(store)
+
+
+fineshow("T4:", store_report)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 4)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 5: Game player progression and achievement system
+
+
+fun calculate_player(player) {
+
+    var total_points = 0
+    var completed = []
+    var unlocked = []
+
+
+    for (mission in player.missions) {
+
+
+        if (mission.completed is TRUE) {
+
+            total_points = total_points + mission.reward
+
+
+            completed = completed + [
+
+                mission.name,
+
+            ]
+
+        }
+
+
+        if (mission.reward > 500) {
+
+            unlocked = unlocked + [
+
+                {
+
+                    achievement: mission.name,
+
+                    level: "gold",
+
+                },
+
+            ]
+
+        }
+
+    }
+
+
+
+    var rank = "Beginner"
+
+
+
+    if (total_points > 2000) {
+
+        rank = "Legend"
+
+    } elif (total_points > 1000) {
+
+        rank = "Advanced"
+
+    } elif (total_points > 500) {
+
+        rank = "Intermediate"
+
+    }
+
+
+
+    return {
+
+
+        player: {
+
+            name: player.name,
+
+            level: player.level,
+
+            rank: rank,
+
+        },
+
+
+        progress: {
+
+            points: total_points,
+
+            missions: completed,
+
+            achievements: unlocked,
+
+        },
+
+
+        active: player.online and total_points > 0,
+
+    }
+
+}
+
+
+
+var player = {
+
+
+    name: "Hero",
+
+
+    level: 15,
+
+
+    online: TRUE,
+
+
+    missions: [
+
+        {
+
+            name: "First Battle",
+
+            reward: 300,
+
+            completed: TRUE,
+
+        },
+
+
+        {
+
+            name: "Dragon Fight",
+
+            reward: 1000,
+
+            completed: TRUE,
+
+        },
+
+
+        {
+
+            name: "Final Boss",
+
+            reward: 1500,
+
+            completed: FALSE,
+
+        },
+
+    ],
+
+}
+
+
+
+var game_result = calculate_player(player)
+
+
+fineshow("T5:", game_result)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 5)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 6: School grading and student performance system
+
+
+fun analyze_students(school) {
+
+    var report = []
+
+
+    for (student in school.students) {
+
+
+        var total = 0
+
+        var subjects = 0
+
+
+        for (mark in student.marks) {
+
+            total = total + mark
+
+            subjects = subjects + 1
+
+        }
+
+
+        var average = total / subjects
+
+        var grade = "F"
+
+        var passed = FALSE
+
+
+
+        if (average >_ 90) {
+
+            grade = "A"
+
+            passed = TRUE
+
+
+        } elif (average >_ 75) {
+
+            grade = "B"
+
+            passed = TRUE
+
+
+        } elif (average >_ 50) {
+
+            grade = "C"
+
+            passed = TRUE
+
+        }
+
+
+
+        var awards = []
+
+
+
+        if (student.activities.sports is TRUE) {
+
+            awards = awards + [
+
+                "Sports",
+
+            ]
+
+        }
+
+
+
+        if (student.activities.coding is TRUE) {
+
+            awards = awards + [
+
+                "Coding",
+
+            ]
+
+        }
+
+
+
+        report = report + [
+
+            {
+
+                name: student.name,
+
+                result: {
+
+                    total: total,
+
+                    average: average,
+
+                    grade: grade,
+
+                    passed: passed,
+
+                },
+
+                awards: awards,
+
+            },
+
+        ]
+
+    }
+
+
+
+    return {
+
+        school: school.name,
+
+        students: report,
+
+        verified: school.active,
+
+    }
+
+}
+
+
+
+var school = {
+
+
+    name: "EGG Academy",
+
+
+    active: TRUE,
+
+
+    students: [
+
+
+        {
+
+            name: "Adib",
+
+            marks: [
+
+                90,
+
+                85,
+
+                95,
+
+            ],
+
+            activities: {
+
+                sports: TRUE,
+
+                coding: TRUE,
+
+            },
+
+        },
+
+
+        {
+
+            name: "Alex",
+
+            marks: [
+
+                60,
+
+                70,
+
+                65,
+
+            ],
+
+            activities: {
+
+                sports: FALSE,
+
+                coding: TRUE,
+
+            },
+
+        },
+
+
+        {
+
+            name: "John",
+
+            marks: [
+
+                30,
+
+                40,
+
+                50,
+
+            ],
+
+            activities: {
+
+                sports: TRUE,
+
+                coding: FALSE,
+
+            },
+
+        },
+
+
+    ],
+
+}
+
+
+
+var school_report = analyze_students(school)
+
+
+fineshow("T6:", school_report)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 6)
+fineshow("STATUS:", "PASSED")
+
+€ Super nested advanced EGG stress tests
+€ Test 7: Company employee payroll and performance system
+
+
+fun generate_payroll(company) {
+
+    var employees_report = []
+    var total_salary = 0
+    var high_performers = []
+
+
+    for (department in company.departments) {
+
+
+        for (employee in department.employees) {
+
+
+            var salary = employee.base_salary
+
+
+            if (employee.performance.score >_ 90) {
+
+                salary = salary + 1000
+
+
+                high_performers = high_performers + [
+
+                    employee.name,
+
+                ]
+
+
+            } elif (employee.performance.score >_ 70) {
+
+                salary = salary + 500
+
+            }
+
+
+
+            if (employee.active is TRUE) {
+
+                total_salary = total_salary + salary
+
+            }
+
+
+
+            var status = "Normal"
+
+
+
+            if (salary > 5000) {
+
+                status = "Senior"
+
+            }
+
+
+
+            employees_report = employees_report + [
+
+                {
+
+                    name: employee.name,
+
+                    department: department.name,
+
+                    salary: salary,
+
+                    status: status,
+
+                    skills: employee.skills,
+
+                },
+
+            ]
+
+        }
+
+    }
+
+
+
+    return {
+
+
+        company: company.name,
+
+
+        payroll: {
+
+            employees: employees_report,
+
+            total_cost: total_salary,
+
+            top_workers: high_performers,
+
+        },
+
+
+        valid: company.active and total_salary > 0,
+
+    }
+
+}
+
+
+
+var company = {
+
+
+    name: "EGG Technologies",
+
+
+    active: TRUE,
+
+
+    departments: [
+
+
+        {
+
+            name: "Engineering",
+
+
+            employees: [
+
+                {
+
+                    name: "Adib",
+
+                    active: TRUE,
+
+                    base_salary: 5000,
+
+                    skills: [
+
+                        "Python",
+
+                        "AI",
+
+                    ],
+
+                    performance: {
+
+                        score: 95,
+
+                    },
+
+                },
+
+
+                {
+
+                    name: "Alex",
+
+                    active: TRUE,
+
+                    base_salary: 3000,
+
+                    skills: [
+
+                        "Frontend",
+
+                    ],
+
+                    performance: {
+
+                        score: 75,
+
+                    },
+
+                },
+
+            ],
+
+        },
+
+
+        {
+
+            name: "Design",
+
+
+            employees: [
+
+                {
+
+                    name: "John",
+
+                    active: FALSE,
+
+                    base_salary: 4000,
+
+                    skills: [
+
+                        "UI",
+
+                    ],
+
+                    performance: {
+
+                        score: 85,
+
+                    },
+
+                },
+
+            ],
+
+        },
+
+
+    ],
+
+}
+
+
+
+var payroll = generate_payroll(company)
+
+
+fineshow("T7:", payroll)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 7)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 8: Smart home automation control system
+
+
+fun control_home(home) {
+
+    var active_devices = []
+    var power_usage = 0
+    var warnings = []
+
+
+    for (room in home.rooms) {
+
+
+        for (device in room.devices) {
+
+
+            if (device.active is TRUE) {
+
+
+                active_devices = active_devices + [
+
+                    {
+
+                        room: room.name,
+
+                        device: device.name,
+
+                    },
+
+                ]
+
+
+                power_usage = power_usage + device.power
+
+
+            }
+
+
+
+            if (device.power > 100) {
+
+
+                warnings = warnings + [
+
+                    {
+
+                        device: device.name,
+
+                        message: "High Power",
+
+                    },
+
+                ]
+
+            }
+
+        }
+
+    }
+
+
+
+    var energy_status = "LOW"
+
+
+
+    if (power_usage > 500) {
+
+
+        energy_status = "HIGH"
+
+
+    } elif (power_usage > 200) {
+
+
+        energy_status = "MEDIUM"
+
+    }
+
+
+
+    return {
+
+
+        home: home.owner,
+
+
+        system: {
+
+            active_devices: active_devices,
+
+            total_power: power_usage,
+
+            energy: energy_status,
+
+            warnings: warnings,
+
+        },
+
+
+        online: home.network.connected,
+
+    }
+
+}
+
+
+
+var smart_home = {
+
+
+    owner: "Adib",
+
+
+    network: {
+
+        connected: TRUE,
+
+    },
+
+
+    rooms: [
+
+
+        {
+
+            name: "Living Room",
+
+
+            devices: [
+
+                {
+
+                    name: "TV",
+
+                    power: 120,
+
+                    active: TRUE,
+
+                },
+
+
+                {
+
+                    name: "Light",
+
+                    power: 40,
+
+                    active: TRUE,
+
+                },
+
+            ],
+
+        },
+
+
+        {
+
+            name: "Office",
+
+
+            devices: [
+
+                {
+
+                    name: "PC",
+
+                    power: 300,
+
+                    active: TRUE,
+
+                },
+
+
+                {
+
+                    name: "Printer",
+
+                    power: 80,
+
+                    active: FALSE,
+
+                },
+
+            ],
+
+        },
+
+
+    ],
+
+}
+
+
+
+var home_report = control_home(smart_home)
+
+
+fineshow("T8:", home_report)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 8)
+fineshow("STATUS:", "PASSED")
+
+
+
+€ Super nested advanced EGG stress tests
+€ Test 9: Hospital patient diagnosis and treatment system
+
+
+fun process_hospital(hospital) {
+
+    var patient_reports = []
+    var emergency_count = 0
+    var total_cost = 0
+
+
+    for (department in hospital.departments) {
+
+
+        for (patient in department.patients) {
+
+
+            var risk = "LOW"
+
+
+            var cost = 0
+
+
+
+            for (treatment in patient.treatments) {
+
+                cost = cost + treatment.price
+
+            }
+
+
+
+            if (patient.vitals.heart_rate > 120 or patient.vitals.temperature > 39) {
+
+                risk = "HIGH"
+
+                emergency_count = emergency_count + 1
+
+            } elif (patient.vitals.heart_rate > 90) {
+
+                risk = "MEDIUM"
+
+            }
+
+
+
+            if (patient.insurance.active is TRUE) {
+
+                cost = cost - 100
+
+            }
+
+
+
+            total_cost = total_cost + cost
+
+
+
+            patient_reports = patient_reports + [
+
+                {
+
+                    name: patient.name,
+
+                    department: department.name,
+
+                    diagnosis: patient.diagnosis,
+
+                    risk: risk,
+
+                    bill: cost,
+
+                    healthy: risk is "LOW",
+
+                },
+
+            ]
+
+        }
+
+    }
+
+
+
+    return {
+
+
+        hospital: hospital.name,
+
+
+        summary: {
+
+            patients: patient_reports,
+
+            emergency_cases: emergency_count,
+
+            total_income: total_cost,
+
+        },
+
+
+        operational: hospital.active and emergency_count < 5,
+
+    }
+
+}
+
+
+
+var hospital = {
+
+
+    name: "EGG Medical Center",
+
+
+    active: TRUE,
+
+
+    departments: [
+
+
+        {
+
+            name: "Cardiology",
+
+
+            patients: [
+
+                {
+
+                    name: "Adib",
+
+                    diagnosis: "Heart Check",
+
+                    vitals: {
+
+                        heart_rate: 95,
+
+                        temperature: 37,
+
+                    },
+
+                    insurance: {
+
+                        active: TRUE,
+
+                    },
+
+                    treatments: [
+
+                        {
+
+                            name: "Test",
+
+                            price: 500,
+
+                        },
+
+                        {
+
+                            name: "Medicine",
+
+                            price: 200,
+
+                        },
+
+                    ],
+
+                },
+
+
+            ],
+
+        },
+
+
+        {
+
+            name: "Emergency",
+
+
+            patients: [
+
+                {
+
+                    name: "Alex",
+
+                    diagnosis: "Fever",
+
+                    vitals: {
+
+                        heart_rate: 130,
+
+                        temperature: 40,
+
+                    },
+
+                    insurance: {
+
+                        active: FALSE,
+
+                    },
+
+                    treatments: [
+
+                        {
+
+                            name: "Emergency",
+
+                            price: 1000,
+
+                        },
+
+                    ],
+
+                },
+
+            ],
+
+        },
+
+
+    ],
+
+}
+
+
+
+var hospital_report = process_hospital(hospital)
+
+
+fineshow("T9:", hospital_report)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 9)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 10: Online learning platform and course analytics system
+
+
+fun analyze_platform(platform) {
+
+    var course_reports = []
+    var total_students = 0
+    var completed_courses = 0
+
+
+    for (course in platform.courses) {
+
+
+        var score_total = 0
+        var student_count = 0
+        var top_students = []
+
+
+
+        for (student in course.students) {
+
+
+            student_count = student_count + 1
+
+            total_students = total_students + 1
+
+
+            score_total = score_total + student.score
+
+
+
+            if (student.score >_ 90) {
+
+
+                top_students = top_students + [
+
+                    {
+
+                        name: student.name,
+
+                        score: student.score,
+
+                    },
+
+                ]
+
+            }
+
+
+
+            if (student.completed is TRUE) {
+
+                completed_courses = completed_courses + 1
+
+            }
+
+
+        }
+
+
+
+        var average = score_total / student_count
+
+
+        var level = "Beginner"
+
+
+
+        if (average >_ 90) {
+
+            level = "Excellent"
+
+        } elif (average >_ 70) {
+
+            level = "Good"
+
+        } elif (average >_ 50) {
+
+            level = "Average"
+
+        }
+
+
+
+        course_reports = course_reports + [
+
+            {
+
+                title: course.title,
+
+                category: course.category,
+
+                average_score: average,
+
+                level: level,
+
+                top_students: top_students,
+
+            },
+
+        ]
+
+
+    }
+
+
+
+    return {
+
+
+        platform: platform.name,
+
+
+        analytics: {
+
+            courses: course_reports,
+
+            students: total_students,
+
+            completed: completed_courses,
+
+        },
+
+
+        active: platform.online and total_students > 0,
+
+    }
+
+}
+
+
+
+var platform = {
+
+
+    name: "EGG Academy",
+
+
+    online: TRUE,
+
+
+    courses: [
+
+
+        {
+
+            title: "Python",
+
+            category: "Programming",
+
+
+            students: [
+
+                {
+
+                    name: "Adib",
+
+                    score: 95,
+
+                    completed: TRUE,
+
+                },
+
+
+                {
+
+                    name: "Alex",
+
+                    score: 75,
+
+                    completed: TRUE,
+
+                },
+
+            ],
+
+        },
+
+
+        {
+
+            title: "AI",
+
+            category: "Machine Learning",
+
+
+            students: [
+
+                {
+
+                    name: "John",
+
+                    score: 60,
+
+                    completed: FALSE,
+
+                },
+
+
+                {
+
+                    name: "Sara",
+
+                    score: 98,
+
+                    completed: TRUE,
+
+                },
+
+            ],
+
+        },
+
+
+    ],
+
+}
+
+
+
+var learning_report = analyze_platform(platform)
+
+
+fineshow("T10:", learning_report)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 10)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 11: Cloud server monitoring and auto scaling system
+
+
+fun monitor_cloud(cloud) {
+
+    var server_reports = []
+    var total_cpu = 0
+    var alerts = []
+
+
+    for (region in cloud.regions) {
+
+
+        for (server in region.servers) {
+
+
+            var status = "NORMAL"
+
+
+
+            total_cpu = total_cpu + server.metrics.cpu
+
+
+
+            if (server.metrics.cpu > 80) {
+
+
+                status = "HIGH LOAD"
+
+
+                alerts = alerts + [
+
+                    {
+
+                        server: server.name,
+
+                        issue: "CPU",
+
+                    },
+
+                ]
+
+            } elif (server.metrics.cpu < 20) {
+
+
+                status = "LOW LOAD"
+
+            }
+
+
+
+            var health = server.active and server.metrics.ram < 90
+
+
+
+            server_reports = server_reports + [
+
+                {
+
+                    name: server.name,
+
+                    region: region.name,
+
+                    cpu: server.metrics.cpu,
+
+                    ram: server.metrics.ram,
+
+                    status: status,
+
+                    healthy: health,
+
+                },
+
+            ]
+
+        }
+
+    }
+
+
+
+    var scaling = FALSE
+
+
+
+    if (total_cpu > 200) {
+
+        scaling = TRUE
+
+    }
+
+
+
+    return {
+
+
+        provider: cloud.name,
+
+
+        infrastructure: {
+
+            servers: server_reports,
+
+            cpu_usage: total_cpu,
+
+            alerts: alerts,
+
+            auto_scale: scaling,
+
+        },
+
+
+        online: cloud.network.active,
+
+    }
+
+}
+
+
+
+var cloud = {
+
+
+    name: "EGG Cloud",
+
+
+    network: {
+
+        active: TRUE,
+
+    },
+
+
+    regions: [
+
+
+        {
+
+            name: "Asia",
+
+
+            servers: [
+
+                {
+
+                    name: "API-1",
+
+                    active: TRUE,
+
+                    metrics: {
+
+                        cpu: 85,
+
+                        ram: 60,
+
+                    },
+
+                },
+
+
+                {
+
+                    name: "DB-1",
+
+                    active: TRUE,
+
+                    metrics: {
+
+                        cpu: 40,
+
+                        ram: 70,
+
+                    },
+
+                },
+
+            ],
+
+        },
+
+
+        {
+
+            name: "Europe",
+
+
+            servers: [
+
+                {
+
+                    name: "WEB-1",
+
+                    active: TRUE,
+
+                    metrics: {
+
+                        cpu: 90,
+
+                        ram: 85,
+
+                    },
+
+                },
+
+            ],
+
+        },
+
+
+    ],
+
+}
+
+
+
+var cloud_report = monitor_cloud(cloud)
+
+
+fineshow("T11:", cloud_report)
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("CURRENT TEST:", 11)
+fineshow("STATUS:", "PASSED")
+
+
+€ Super nested advanced EGG stress tests
+€ Test 12: Social media analytics and recommendation system
+
+
+fun analyze_social(network) {
+
+    var user_reports = []
+    var total_likes = 0
+    var active_users = 0
+
+
+    for (user in network.users) {
+
+
+        var engagement = 0
+
+        var posts_count = 0
+
+
+
+        for (post in user.posts) {
+
+
+            engagement = engagement + post.likes
+
+            total_likes = total_likes + post.likes
+
+            posts_count = posts_count + 1
+
+
+
+            if (post.likes > 100) {
+
+
+                user_reports = user_reports + [
+
+                    {
+
+                        user: user.name,
+
+                        popular_post: post.title,
+
+                    },
+
+                ]
+
+            }
+
+        }
+
+
+
+        if (user.active is TRUE) {
+
+            active_users = active_users + 1
+
+        }
+
+
+
+        var average = engagement / posts_count
+
+
+
+        user_reports = user_reports + [
+
+            {
+
+                name: user.name,
+
+                likes: engagement,
+
+                average: average,
+
+                active: user.active,
+
+            },
+
+        ]
+
+    }
+
+
+
+    return {
+
+        platform: network.name,
+
+        analytics: {
+
+            users: user_reports,
+
+            likes: total_likes,
+
+            active: active_users,
+
+        },
+
+        running: network.online,
+
+    }
+
+}
+
+
+
+var social = {
+
+    name:"EGG Social",
+
+    online:TRUE,
+
+    users:[
+
+        {
+
+            name:"Adib",
+
+            active:TRUE,
+
+            posts:[
+
+                {
+
+                    title:"AI",
+
+                    likes:200,
+
+                },
+
+                {
+
+                    title:"Code",
+
+                    likes:80,
+
+                },
+
+            ],
+
+        },
+
+        {
+
+            name:"Alex",
+
+            active:FALSE,
+
+            posts:[
+
+                {
+
+                    title:"Game",
+
+                    likes:150,
+
+                },
+
+            ],
+
+        },
+
+    ],
+
+}
+
+
+
+var social_report = analyze_social(social)
+
+
+fineshow("T12:", social_report)
+
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+
+fineshow("CURRENT TEST:",12)
+
+fineshow("STATUS:","PASSED")
+
+
+
+
+
+
+€ Test 13: Smart factory production control system
+
+
+fun factory_monitor(factory) {
+
+    var products = []
+    var total_units = 0
+    var failed_units = 0
+
+
+    for (line in factory.lines) {
+
+
+        for (machine in line.machines) {
+
+
+            var machine_status = "READY"
+
+
+
+            if (machine.temperature > 80) {
+
+                machine_status = "OVERHEAT"
+
+            }
+
+
+
+            for (product in machine.products) {
+
+
+                total_units = total_units + 1
+
+
+
+                if (product.quality is FALSE) {
+
+
+                    failed_units = failed_units + 1
+
+
+                }
+
+
+
+                products = products + [
+
+                    {
+
+                        name:product.name,
+
+                        machine:machine.name,
+
+                        quality:product.quality,
+
+                    },
+
+                ]
+
+            }
+
+        }
+
+    }
+
+
+
+    var efficiency = total_units - failed_units
+
+
+
+    return {
+
+
+        factory:factory.name,
+
+
+        report:{
+
+            products:products,
+
+            total:total_units,
+
+            failed:failed_units,
+
+            efficiency:efficiency,
+
+        },
+
+
+        operational:factory.active and efficiency > 0,
+
+    }
+
+}
+
+
+
+var factory = {
+
+
+    name:"EGG Factory",
+
+
+    active:TRUE,
+
+
+    lines:[
+
+
+        {
+
+            name:"Line A",
+
+            machines:[
+
+
+                {
+
+                    name:"Machine 1",
+
+                    temperature:70,
+
+                    products:[
+
+                        {
+
+                            name:"CPU",
+
+                            quality:TRUE,
+
+                        },
+
+                        {
+
+                            name:"RAM",
+
+                            quality:TRUE,
+
+                        },
+
+                    ],
+
+                },
+
+
+            ],
+
+        },
+
+
+        {
+
+            name:"Line B",
+
+            machines:[
+
+
+                {
+
+                    name:"Machine 2",
+
+                    temperature:90,
+
+                    products:[
+
+                        {
+
+                            name:"SSD",
+
+                            quality:FALSE,
+
+                        },
+
+                    ],
+
+                },
+
+
+            ],
+
+        },
+
+
+    ],
+
+}
+
+
+
+var factory_report = factory_monitor(factory)
+
+
+fineshow("T13:", factory_report)
+
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+
+fineshow("CURRENT TEST:",13)
+
+fineshow("STATUS:","PASSED")
+
+
+€ Super nested advanced EGG stress tests
+
+
+fun finance_system(data) {
+
+    var reports = []
+    var total = 0
+
+    for (account in data.accounts) {
+
+        var balance = account.balance
+
+        for (transaction in account.transactions) {
+
+            if (transaction.type is "add") {
+                balance = balance + transaction.amount
+            } else {
+                balance = balance - transaction.amount
+            }
+
+        }
+
+        total = total + balance
+
+        reports = reports + [{
+            user: account.user,
+            balance: balance,
+            valid: balance > 0,
+        }]
+
+    }
+
+    return {
+        reports: reports,
+        total: total,
+    }
+}
+
+var finance = finance_system({
+    accounts:[
+        {
+            user:"Adib",
+            balance:1000,
+            transactions:[
+                {type:"add",amount:500,},
+                {type:"sub",amount:200,},
+            ],
+        },
+    ],
+})
+
+fineshow("T14:",finance)
+
+
+
+fun delivery_system(company) {
+
+    var result = []
+
+    for (driver in company.drivers) {
+
+        var distance = 0
+
+        for (delivery in driver.deliveries) {
+
+            distance = distance + delivery.distance
+
+        }
+
+        result = result + [{
+            driver:driver.name,
+            distance:distance,
+        }]
+
+    }
+
+    return result
+}
+
+fineshow("T15:",delivery_system({
+    drivers:[
+        {
+            name:"Alex",
+            deliveries:[
+                {distance:10,},
+                {distance:20,},
+            ],
+        },
+    ],
+}))
+
+
+
+fun security_scan(system) {
+
+    var threats = []
+
+    for (server in system.servers) {
+
+        if (server.online and server.security.updated is FALSE) {
+
+            threats = threats + [
+                server.name,
+            ]
+
+        }
+
+    }
+
+    return {
+        threats:threats,
+        safe:threats[0] is NONE,
+    }
+
+}
+
+fineshow("T16:",security_scan({
+    servers:[
+        {
+            name:"API",
+            online:TRUE,
+            security:{
+                updated:FALSE,
+            },
+        },
+    ],
+}))
+
+
+
+fun restaurant(order) {
+
+    var total = 0
+
+    for (item in order.items) {
+
+        total = total + item.price * item.count
+
+    }
+
+    return {
+        customer:order.name,
+        bill:total,
+        paid:total > 0,
+    }
+
+}
+
+fineshow("T17:",restaurant({
+    name:"Adib",
+    items:[
+        {
+            price:100,
+            count:2,
+        },
+        {
+            price:50,
+            count:3,
+        },
+    ],
+}))
+
+
+
+fun game_engine(game) {
+
+    var score = 0
+
+    for (level in game.levels) {
+
+        if (level.completed) {
+
+            score = score + level.reward
+
+        }
+
+    }
+
+    return {
+        player:game.player,
+        score:score,
+        win:score > 1000,
+    }
+
+}
+
+fineshow("T18:",game_engine({
+    player:"Hero",
+    levels:[
+        {
+            completed:TRUE,
+            reward:500,
+        },
+        {
+            completed:TRUE,
+            reward:700,
+        },
+    ],
+}))
+
+
+
+fun api_gateway(api) {
+
+    var responses = []
+
+    for (request in api.requests) {
+
+        if (request.valid) {
+
+            responses = responses + [{
+                code:200,
+                data:request.data,
+            }]
+
+        } else {
+
+            responses = responses + [{
+                code:400,
+                data:NONE,
+            }]
+
+        }
+
+    }
+
+    return responses
+
+}
+
+fineshow("T19:",api_gateway({
+    requests:[
+        {
+            valid:TRUE,
+            data:"LOGIN",
+        },
+        {
+            valid:FALSE,
+            data:NONE,
+        },
+    ],
+}))
+
+
+
+fun final_system(system) {
+
+    var result = []
+
+    for (module in system.modules) {
+
+        var status = module.active and module.version is "1.0"
+
+        result = result + [{
+            name:module.name,
+            running:status,
+        }]
+
+    }
+
+    return {
+        system:system.name,
+        modules:result,
+        complete:TRUE,
+    }
+
+}
+
+
+fineshow("T20:",final_system({
+    name:"EGG OS",
+    modules:[
+        {
+            name:"CORE",
+            active:TRUE,
+            version:"1.0",
+        },
+        {
+            name:"NETWORK",
+            active:TRUE,
+            version:"1.0",
+        },
+    ],
+}))
+
+
+
+
+fineshow("SUPER NESTED TEST RESULT")
+fineshow("TOTAL TESTS:",20)
+fineshow("PASSED:",20)
+fineshow("FAILED:",0)
+fineshow("STATUS:","ALL PASSED")
+

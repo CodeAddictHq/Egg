@@ -1,0 +1,234 @@
+€  if statement test cases
+
+
+var age = 20
+
+if (age > 18) {
+    fineshow("T1:", "Adult")
+} else {
+    fineshow("T1:", "Young")
+}
+
+
+
+var score = 85
+
+if (score >_ 90) {
+    fineshow("T2:", "A")
+} elif (score >_ 80) {
+    fineshow("T2:", "B")
+} else {
+    fineshow("T2:", "C")
+}
+
+
+
+var active = TRUE
+
+if (active) {
+    fineshow("T3:", "Active")
+} else {
+    fineshow("T3:", "Inactive")
+}
+
+
+
+var password = "egg123"
+
+if (password is "egg123") {
+    fineshow("T4:", TRUE)
+} else {
+    fineshow("T4:", FALSE)
+}
+
+
+
+var user = {
+    name:"Adib",
+    admin:TRUE,
+}
+
+if (user.admin is TRUE) {
+    fineshow("T5:", "Admin Access")
+} else {
+    fineshow("T5:", "User Access")
+}
+
+
+
+var number = 0
+
+if (number > 0) {
+    fineshow("T6:", "Positive")
+} elif (number is 0) {
+    fineshow("T6:", "Zero")
+} else {
+    fineshow("T6:", "Negative")
+}
+
+
+
+var a = 10
+var b = 20
+
+if (a < b and b > 15) {
+    fineshow("T7:", TRUE)
+} else {
+    fineshow("T7:", FALSE)
+}
+
+
+
+var temperature = 35
+
+if (temperature > 40) {
+    fineshow("T8:", "Hot")
+} elif (temperature > 20) {
+    fineshow("T8:", "Normal")
+} else {
+    fineshow("T8:", "Cold")
+}
+
+
+
+var items = [1,2,3,]
+
+if (items[0] is 1) {
+    fineshow("T9:", "Found")
+} else {
+    fineshow("T9:", "Missing")
+}
+
+
+
+var account = {
+    balance:5000,
+    active:TRUE,
+}
+
+if (account.balance > 0 and account.active) {
+    fineshow("T10:", "Valid Account")
+} else {
+    fineshow("T10:", "Invalid Account")
+}
+
+
+
+var role = "developer"
+
+if (role is "admin") {
+    fineshow("T11:", "Full")
+} elif (role is "developer") {
+    fineshow("T11:", "Limited")
+} else {
+    fineshow("T11:", "None")
+}
+
+
+
+var value = NONE
+
+if (value is NONE) {
+    fineshow("T12:", "Empty")
+} else {
+    fineshow("T12:", "Data")
+}
+
+
+
+var x = 100
+
+if (not x < 50) {
+    fineshow("T13:", TRUE)
+} else {
+    fineshow("T13:", FALSE)
+}
+
+
+
+var user_data = {
+    profile:{
+        verified:TRUE,
+    },
+}
+
+if (user_data.profile.verified) {
+    fineshow("T14:", "Verified")
+} else {
+    fineshow("T14:", "Not Verified")
+}
+
+
+
+var price = 1000
+
+if (price > 500 and price <_ 1500) {
+    fineshow("T15:", "Range OK")
+} else {
+    fineshow("T15:", "Out")
+}
+
+
+
+var login = {
+    username:"Adib",
+    success:TRUE,
+}
+
+if (login.success is TRUE) {
+    fineshow("T16:", "Login Success")
+} else {
+    fineshow("T16:", "Failed")
+}
+
+
+
+var numbers = [10,20,30,]
+
+if (numbers[-1] > 20) {
+    fineshow("T17:", "Large")
+} else {
+    fineshow("T17:", "Small")
+}
+
+
+
+var result = 50 + 20 * 2
+
+if (result is 90) {
+    fineshow("T18:", "Correct")
+} else {
+    fineshow("T18:", "Wrong")
+}
+
+
+
+var system = {
+    online:TRUE,
+    users:100,
+}
+
+if (system.online and system.users > 50) {
+    fineshow("T19:", "Running")
+} else {
+    fineshow("T19:", "Stopped")
+}
+
+
+
+var final = {
+    tests:20,
+    passed:20,
+}
+
+if (final.tests is final.passed) {
+    fineshow("T20:", "ALL PASSED")
+} else {
+    fineshow("T20:", "FAILED")
+}
+
+
+
+
+fineshow("TOTAL TESTS:",20)
+fineshow("STATUS:","ALL PASSED")

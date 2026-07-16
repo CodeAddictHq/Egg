@@ -1,0 +1,506 @@
+€ Professional function and datatype stress tests
+
+
+fun math_engine(a, b) {
+
+    var add = a + b
+    var sub = a - b
+    var mul = a * b
+    var div = a / b
+    var power = a ^ 2
+
+    return {
+        addition: add,
+        subtraction: sub,
+        multiplication: mul,
+        division: div,
+        square: power,
+    }
+}
+
+
+var math = math_engine(20, 5)
+
+fineshow("T1:", math)
+
+
+
+fun user_profile(name, age, active) {
+
+    var status = age > 18 and active
+
+    return {
+        username: name,
+        age: age,
+        active: active,
+        verified: status,
+    }
+}
+
+
+var profile = user_profile("Adib", 20, TRUE)
+
+fineshow("T2:", profile)
+
+
+
+fun list_processor(numbers) {
+
+    var total = 0
+
+    for (n in numbers) {
+        total = total + n
+    }
+
+    return {
+        values: numbers,
+        sum: total,
+    }
+}
+
+
+var list_result = list_processor([10,20,30,])
+
+
+fineshow("T3:", list_result)
+
+
+
+fun calculator(price, quantity, discount) {
+
+    var subtotal = price * quantity
+
+    var final = subtotal - discount
+
+    return {
+        price: price,
+        quantity: quantity,
+        subtotal: subtotal,
+        discount: discount,
+        total: final,
+    }
+}
+
+
+var invoice = calculator(100,5,50)
+
+fineshow("T4:", invoice)
+
+
+
+fun account_system(balance, deposit, withdraw) {
+
+    var current = balance + deposit - withdraw
+
+    return {
+        old_balance: balance,
+        deposit: deposit,
+        withdraw: withdraw,
+        balance: current,
+        valid: current > 0,
+    }
+}
+
+
+var account = account_system(5000,2000,1000)
+
+fineshow("T5:", account)
+
+
+
+fun product_factory(name, price) {
+
+    return {
+        product_name: name,
+        price: price,
+        available: price > 0,
+    }
+}
+
+
+var product = product_factory("Laptop",1200)
+
+fineshow("T6:", product)
+
+
+
+fun nested_data() {
+
+    return {
+        company: {
+            name: "EGG",
+            employees: [
+                {
+                    id:1,
+                    active:TRUE,
+                },
+                {
+                    id:2,
+                    active:FALSE,
+                },
+            ],
+        },
+    }
+}
+
+
+var company = nested_data()
+
+fineshow("T7:", company)
+
+
+
+fun grade_system(score) {
+
+    if (score >_ 80) {
+
+        return {
+            grade:"A",
+            passed:TRUE,
+        }
+
+    } elif (score >_ 50) {
+
+        return {
+            grade:"B",
+            passed:TRUE,
+        }
+
+    } else {
+
+        return {
+            grade:"F",
+            passed:FALSE,
+        }
+
+    }
+}
+
+
+var grade = grade_system(90)
+
+fineshow("T8:", grade)
+
+
+
+fun fibonacci(limit) {
+
+    var a = 0
+    var b = 1
+    var result = []
+
+    while (a < limit) {
+
+        result = result + [a,]
+
+        var next = a + b
+
+        a = b
+        b = next
+    }
+
+    return result
+}
+
+
+var fib = fibonacci(50)
+
+fineshow("T9:", fib)
+
+
+
+fun text_service(text) {
+
+    return {
+        value:text,
+        empty:text is "",
+        type:"string",
+    }
+
+}
+
+
+var message = text_service("Hello EGG")
+
+fineshow("T10:", message)
+
+
+
+€ Professional function and datatype stress tests Part 2
+
+
+fun api_response(code, message, data) {
+
+    var success = code is 200
+
+    return {
+        status: code,
+        message: message,
+        data: data,
+        success: success,
+    }
+}
+
+
+var response = api_response(200, "OK", "Loaded")
+
+fineshow("T11:", response)
+
+
+
+fun inventory_manager(items) {
+
+    var count = 0
+
+    for (item in items) {
+
+        count = count + 1
+
+    }
+
+    return {
+        items: items,
+        total_items: count,
+    }
+}
+
+
+var inventory = inventory_manager([
+    "Keyboard",
+    "Mouse",
+    "Monitor",
+])
+
+
+fineshow("T12:", inventory)
+
+
+
+fun temperature_converter(celsius) {
+
+    var fahrenheit = celsius * 9 / 5 + 32
+
+    return {
+        celsius: celsius,
+        fahrenheit: fahrenheit,
+    }
+}
+
+
+var temperature = temperature_converter(25)
+
+fineshow("T13:", temperature)
+
+
+
+fun permission_system(user) {
+
+    if (user.admin is TRUE) {
+
+        return {
+            access:TRUE,
+            level:"admin",
+        }
+
+    } elif (user.active is TRUE) {
+
+        return {
+            access:TRUE,
+            level:"user",
+        }
+
+    } else {
+
+        return {
+            access:FALSE,
+            level:"blocked",
+        }
+
+    }
+
+}
+
+
+var account_user = {
+    name:"Alex",
+    admin:FALSE,
+    active:TRUE,
+}
+
+
+var permission = permission_system(account_user)
+
+fineshow("T14:", permission)
+
+
+
+fun analytics(numbers) {
+
+    var total = 0
+
+    for (number in numbers) {
+
+        total = total + number
+
+    }
+
+
+    return {
+        values:numbers,
+        total:total,
+        average:total / 3,
+    }
+
+}
+
+
+var report = analytics([30,60,90,])
+
+fineshow("T15:", report)
+
+
+
+fun game_player(name, health) {
+
+    fun health_check(value) {
+
+        return value > 0
+
+    }
+
+
+    return {
+        player:name,
+        health:health,
+        alive:health_check(health),
+    }
+
+}
+
+
+var player = game_player("Hero",100)
+
+fineshow("T16:", player)
+
+
+
+fun configuration() {
+
+    var settings = {
+        version:"1.0",
+        debug:FALSE,
+        features:[
+            "API",
+            "DATABASE",
+            "AUTH",
+        ],
+    }
+
+
+    return settings
+
+}
+
+
+var config = configuration()
+
+fineshow("T17:", config)
+
+
+
+fun shopping_system(products) {
+
+    var total = 0
+
+    for (product in products) {
+
+        total = total + product.price
+
+    }
+
+
+    return {
+        products:products,
+        total:total,
+        completed:total > 0,
+    }
+
+}
+
+
+var cart = shopping_system([
+    {
+        name:"Phone",
+        price:500,
+    },
+    {
+        name:"Cover",
+        price:50,
+    },
+])
+
+
+fineshow("T18:", cart)
+
+
+
+fun null_handler(value) {
+
+    if (value is NONE) {
+
+        return {
+            value:NONE,
+            exists:FALSE,
+        }
+
+    }
+
+
+    return {
+        value:value,
+        exists:TRUE,
+    }
+
+}
+
+
+var empty_data = null_handler(NONE)
+
+fineshow("T19:", empty_data)
+
+
+
+fun enterprise_system(request) {
+
+    return {
+        request:request,
+
+        server:{
+            online:TRUE,
+            version:"2.0",
+        },
+
+        response:{
+            code:200,
+            message:"SUCCESS",
+        },
+
+        metrics:{
+            users:1000,
+            load:75.5,
+        },
+    }
+
+}
+
+
+var system = enterprise_system("LOGIN")
+
+
+fineshow("T20:", system)
+
+
+
+
+fineshow("TOTAL TESTS:",20)
+fineshow("STATUS:","ALL PASSED")

@@ -1,0 +1,130 @@
+from collections import deque
+from ..Errors.runtime import TypeNotAllowed, RuntimeError, NotFoundError, ArgsNotAllowed
+
+
+class Fun:
+  def show(self, val):
+    try:
+      for i in val:
+        print(i)
+    except Exception as e:
+      raise RuntimeError(str(e))
+
+  def fineshow(self, val):
+    try:
+      fine_str = ""
+      for i in val:
+        fine_str += str(i)
+      print(fine_str)
+    except Exception as e:
+      raise RuntimeError(str(e))
+
+  def type(self, val):
+    try:
+      if len(val) > 1:
+        raise ArgsNotAllowed("Args allowed only 1")
+      return self.get_types(val[0])
+    except Exception:
+      raise
+
+  def get_types(self, val):
+    try:
+      if isinstance(val, list):
+        return "ARRAY"
+      elif isinstance(val, int):
+        return "INTEGER"
+      elif isinstance(val, dict):
+        return "HASHMAP"
+      elif isinstance(val, float):
+        return "FLOATING"
+      elif isinstance(val, str):
+        return "STRING"
+      elif isinstance(val, type({}.keys())):
+        return "HASH_KEYS"
+      elif isinstance(val, type({}.values())):
+        return "HASH_VALUES"
+      else:
+        return None
+    except Exception as e:
+      raise RuntimeError(str(e))
+
+  def keys(self, val):
+    try:
+      if len(val) != 1 or not isinstance(val[0], dict):
+        raise TypeNotAllowed()
+      return val[0].keys()
+    except Exception:
+      raise
+
+  def values(self, val):
+    try:
+      if len(val) != 1 or not isinstance(val[0], dict):
+        raise TypeNotAllowed()
+      return val[0].values()
+    except Exception:
+      raise
+
+  def check(self, val):
+    try:
+      if len(val) > 1:
+        raise ArgsNotAllowed("Args allowed only 1")
+    except Exception:
+      raise
+
+  def string(self, val):
+    try:
+      if len(val) != 1:
+        raise TypeNotAllowed()
+      return str(val[0])
+    except Exception:
+      raise
+
+  def number(self, val):
+    try:
+      if len(val) != 1:
+        raise TypeNotAllowed()
+      try:
+        return int(val[0])
+      except ValueError:
+        return float(val[0])
+    except (ValueError, TypeError):
+      raise TypeNotAllowed()
+    except Exception:
+      raise
+
+  def ask(self, val):
+    try:
+      if val and val[0]:
+        self.check(val)
+        return input(val[0])
+      return input()
+    except Exception:
+      raise
+
+  # List methods
+
+  def method_push(self, val):
+    try:
+      if len(val) != 2:
+        raise TypeNotAllowed(f"Unsupported arguments >> {val}")
+      val[1].append(val[0])
+    except AttributeError:
+      raise TypeNotAllowed(
+        f"Type not allowed for push >> {self.get_types(val[1])}"
+      )
+    except Exception:
+      raise
+
+  def method_pop(self, val):
+    try:
+      if len(val) != 2:
+        raise TypeNotAllowed(f"Unsupported arguments >> {val}")
+      return val[0].pop()
+    except AttributeError:
+      raise TypeNotAllowed(
+        f"Type not allowed for pop >> {self.get_types(val[0])}"
+      )
+    except Exception:
+      raise
+
+  # Dict methods

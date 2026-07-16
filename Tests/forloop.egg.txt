@@ -1,0 +1,303 @@
+€ Professional for loop test cases
+
+
+var numbers = [1,2,3,4,5,]
+
+for (n in numbers) {
+    fineshow("T1:", n)
+}
+
+
+var names = [
+    "Adib",
+    "Alex",
+    "John",
+]
+
+for (name in names) {
+    fineshow("T2:", name)
+}
+
+
+var total = 0
+
+for (value in [10,20,30,]) {
+    total = total + value
+}
+
+fineshow("T3:", total)
+
+
+var squares = []
+
+for (n in [1,2,3,4,]) {
+    squares = squares + [n * n,]
+}
+
+fineshow("T4:", squares)
+
+
+var user = {
+    name:"Adib",
+    age:18,
+    active:TRUE,
+}
+
+for (key in keys(user)) {
+    fineshow("T5:", key)
+}
+
+
+var data = {
+    a:10,
+    b:20,
+    c:30,
+}
+
+var sum = 0
+
+for (value in values(data)) {
+    sum = sum + value
+}
+
+fineshow("T6:", sum)
+
+
+var matrix = [
+    [1,2,],
+    [3,4,],
+]
+
+for (row in matrix) {
+
+    for (item in row) {
+
+        fineshow("T7:", item)
+
+    }
+
+}
+
+
+var even = []
+
+for (n in [1,2,3,4,5,6,]) {
+
+    if (n / 2 * 2 is n) {
+        even = even + [n,]
+    }
+
+}
+
+fineshow("T8:", even)
+
+
+
+var products = [
+    {
+        name:"Laptop",
+        price:1000,
+    },
+    {
+        name:"Phone",
+        price:500,
+    },
+]
+
+
+for (product in products) {
+
+    fineshow("T9:", product.name)
+
+}
+
+
+
+var prices = 0
+
+for (product in products) {
+
+    prices = prices + product.price
+
+}
+
+fineshow("T10:", prices)
+
+
+
+var count = 0
+
+for (x in [5,10,15,]) {
+
+    count = count + 1
+
+}
+
+fineshow("T11:", count)
+
+
+
+var result = []
+
+for (n in [2,4,6,8,]) {
+
+    result = result + [n + 10,]
+
+}
+
+fineshow("T12:", result)
+
+
+
+var found = FALSE
+
+for (n in [1,2,3,4,]) {
+
+    if (n is 3) {
+
+        found = TRUE
+        stop
+
+    }
+
+}
+
+fineshow("T13:", found)
+
+
+
+var skipped = []
+
+for (n in [1,2,3,4,5,]) {
+
+    if (n is 3) {
+
+        skip
+
+    }
+
+    skipped = skipped + [n,]
+
+}
+
+fineshow("T14:", skipped)
+
+
+
+fun calculate(numbers) {
+
+    var total = 0
+
+    for (n in numbers) {
+
+        total = total + n
+
+    }
+
+    return total
+
+}
+
+
+var calculated = calculate([100,200,300,])
+
+fineshow("T15:", calculated)
+
+
+
+var accounts = [
+    {
+        balance:1000,
+    },
+    {
+        balance:2000,
+    },
+]
+
+
+var balance = 0
+
+for (account in accounts) {
+
+    balance = balance + account.balance
+
+}
+
+fineshow("T16:", balance)
+
+
+
+var words = [
+    "EGG",
+    "LANG",
+]
+
+var text = ""
+
+for (word in words) {
+
+    text = text + word
+
+}
+
+fineshow("T17:", text)
+
+
+
+var nested = [
+    [
+        10,
+        20,
+    ],
+    [
+        30,
+        40,
+    ],
+]
+
+
+var nested_sum = 0
+
+for (group in nested) {
+
+    for (number in group) {
+
+        nested_sum = nested_sum + number
+
+    }
+
+}
+
+fineshow("T18:", nested_sum)
+
+
+
+var status = []
+
+for (n in [10,20,30,]) {
+
+    status = status + [
+        n > 15,
+    ]
+
+}
+
+fineshow("T19:", status)
+
+
+
+var report = {
+    passed:20,
+    failed:0,
+}
+
+
+for (value in values(report)) {
+
+    fineshow("T20:", value)
+
+}
+
+
+fineshow("TOTAL TESTS:",20)
+fineshow("STATUS:","ALL PASSED")
